@@ -102,8 +102,10 @@ class WPJobster_Rave_Loader
       update_option('wpjobster_' . $this->unique_slug . '_button_caption', trim($_POST['wpjobster_' . $this->unique_slug . '_button_caption']));
 			// you can add here any other information that you need from the user
       update_option('wpjobster_rave_enablesandbox', trim($_POST['wpjobster_rave_enablesandbox']));
-      update_option('wpjobster_rave_sk', trim($_POST['wpjobster_rave_sk']));
-      update_option('wpjobster_rave_pk', trim($_POST['wpjobster_rave_pk']));
+      update_option('wpjobster_rave_live_sk', trim($_POST['wpjobster_rave_live_sk']));
+      update_option('wpjobster_rave_live_pk', trim($_POST['wpjobster_rave_live_pk']));
+      update_option('wpjobster_rave_test_sk', trim($_POST['wpjobster_rave_test_sk']));
+      update_option('wpjobster_rave_test_pk', trim($_POST['wpjobster_rave_test_pk']));
       update_option('wpjobster_rave_logo', trim($_POST['wpjobster_rave_logo']));
       update_option('wpjobster_rave_pym', trim($_POST['wpjobster_rave_pym']));
       update_option('wpjobster_rave_country', trim($_POST['wpjobster_rave_country']));
@@ -165,14 +167,24 @@ class WPJobster_Rave_Loader
 					<td><input type="text" size="85" name="wpjobster_<?php echo $this->unique_slug; ?>_button_caption" value="<?php echo get_option('wpjobster_' . $this->unique_slug . '_button_caption'); ?>" /></td>
 				</tr>
 				<tr>
-					<td valign=top width="22"><?php wpjobster_theme_bullet(__('Your Rave Secret Key', 'wpjobster-rave')); ?></td>
-					<td ><?php _e('Rave Secret Key:', 'wpjobster-rave'); ?></td>
-					<td><input type="text" size="85" name="wpjobster_rave_sk" value="<?php echo get_option('wpjobster_rave_sk'); ?>" /></td>
+					<td valign=top width="22"><?php wpjobster_theme_bullet(__('Your Rave Live Secret Key', 'wpjobster-rave')); ?></td>
+					<td ><?php _e('Rave Live Secret Key:', 'wpjobster-rave'); ?></td>
+					<td><input type="text" size="85" name="wpjobster_rave_live_sk" value="<?php echo get_option('wpjobster_rave_live_sk'); ?>" /></td>
 				</tr>
 				<tr>
-					<td valign=top width="22"><?php wpjobster_theme_bullet(__('Your Rave Public Key', 'wpjobster-rave')); ?></td>
-					<td ><?php _e('Rave Public Key:', 'wpjobster-rave'); ?></td>
-					<td><input type="text" size="85" name="wpjobster_rave_pk" value="<?php echo get_option('wpjobster_rave_pk'); ?>" /></td>
+					<td valign=top width="22"><?php wpjobster_theme_bullet(__('Your Rave Live Public Key', 'wpjobster-rave')); ?></td>
+					<td ><?php _e('Rave Live Public Key:', 'wpjobster-rave'); ?></td>
+					<td><input type="text" size="85" name="wpjobster_rave_live_pk" value="<?php echo get_option('wpjobster_rave_live_pk'); ?>" /></td>
+				</tr>
+				<tr>
+					<td valign=top width="22"><?php wpjobster_theme_bullet(__('Your Rave Test Secret Key', 'wpjobster-rave')); ?></td>
+					<td ><?php _e('Rave Test Secret Key:', 'wpjobster-rave'); ?></td>
+					<td><input type="text" size="85" name="wpjobster_rave_test_sk" value="<?php echo get_option('wpjobster_rave_test_sk'); ?>" /></td>
+				</tr>
+				<tr>
+					<td valign=top width="22"><?php wpjobster_theme_bullet(__('Your Rave Test Public Key', 'wpjobster-rave')); ?></td>
+					<td ><?php _e('Rave Test Public Key:', 'wpjobster-rave'); ?></td>
+					<td><input type="text" size="85" name="wpjobster_rave_test_pk" value="<?php echo get_option('wpjobster_rave_test_pk'); ?>" /></td>
 				</tr>
 				<tr>
 					<td valign=top width="22"><?php wpjobster_theme_bullet(__('Your Rave Logo Link (Preferrably square size)', 'wpjobster-rave')); ?></td>
@@ -225,12 +237,14 @@ public function get_gateway_credentials()
   $wpjobster_rave_enablesandbox = get_option('wpjobster_rave_enablesandbox');
   if ($wpjobster_rave_enablesandbox == 'no') {
     $rave_payment_url = 'https://api.ravepay.co';
+    $publickey = get_option('wpjobster_rave_live_pk');
+    $secretkey = get_option('wpjobster_rave_live_sk');
   } else {
     $rave_payment_url = 'https://rave-api-v2.herokuapp.com';
+    $publickey = get_option('wpjobster_rave_test_pk');
+    $secretkey = get_option('wpjobster_rave_test_sk');
   }
 
-  $publickey = get_option('wpjobster_rave_pk');
-  $secretkey = get_option('wpjobster_rave_sk');
   $payment_method = get_option('wpjobster_rave_pym');
 
   $credentials = array(
