@@ -1,7 +1,7 @@
 # Rave Payment Gateway for WPJobster
 This is a wordpress payment gateway plugin for Paid Membership Pro that allows you to accept payments using Flutterwave's Rave
  - **Contributors:** Oluwole Adebiyi (KingFlamez)
- - **Tags:** rave, flutterwave, payment gateway, bank account, credit card, debit card, nigeria, kenya, ghana, international, mastercard, ghc, kes, ngn, usd, visa, WPJobster, Wordpress.
+ - **Tags:** rave, flutterwave, payment gateway, bank account, credit card, debit card, nigeria, kenya, ghana, international, mastercard, ghc, kes, ngn, usd, zar, visa, WPJobster, Wordpress.
 
 
 ## Requirements
@@ -15,13 +15,14 @@ Accept Credit card, Debit card and Bank account payment on Paid Membership Pro w
 
 > Signup for a `Live Account` [here](https://rave.flutterwave.com/)
 
-> Signup for a `Test Account` [here](https://raveappv2.herokuapp.com/)
+> Signup for a `Test Account` [here](https://ravesandbox.flutterwave.com/)
 
 Rave is available in:
 
 * __Nigeria__
 * __Ghana__
 * __Kenya__
+* __South Africa__
 
 ## Install
 1. Download the Zip file of this plugin.

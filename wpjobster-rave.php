@@ -132,7 +132,8 @@ class WPJobster_Rave_Loader
     $country = array(
       'NG' => 'Nigeria',
       'KE' => 'Kenya',
-      'GH' => 'Ghana'
+      'GH' => 'Ghana',
+      'ZA' => 'South Africa'
     );
     
     $tab_id = get_tab_id($wpjobster_payment_gateways);
@@ -240,7 +241,7 @@ public function get_gateway_credentials()
     $publickey = get_option('wpjobster_rave_live_pk');
     $secretkey = get_option('wpjobster_rave_live_sk');
   } else {
-    $rave_payment_url = 'https://rave-api-v2.herokuapp.com';
+    $rave_payment_url = 'https://ravesandboxapi.flutterwave.com';
     $publickey = get_option('wpjobster_rave_test_pk');
     $secretkey = get_option('wpjobster_rave_test_sk');
   }
@@ -377,7 +378,7 @@ function requery($payment_type, $details)
   if ($wpjobster_rave_enablesandbox == 'no') {
     $apiLink = 'https://api.ravepay.co';
   } else {
-    $apiLink = 'http://flw-pms-dev.eu-west-1.elasticbeanstalk.com/';
+    $apiLink = 'https://ravesandboxapi.flutterwave.com';
   }
 
   $txref = $_REQUEST['txref'];
@@ -391,7 +392,7 @@ function requery($payment_type, $details)
 	    // make request to endpoint.
   $data_string = json_encode($data);
   $ch = curl_init();
-  curl_setopt($ch, CURLOPT_URL, $apiLink . 'flwv3-pug/getpaidx/api/xrequery');
+  curl_setopt($ch, CURLOPT_URL, $apiLink . '/flwv3-pug/getpaidx/api/v2/verify');
   curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
   curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
